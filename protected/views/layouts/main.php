@@ -21,70 +21,35 @@
     <body>
         <nav class="navbar navbar-default" role="navigation">
             <?php
+            echo CHtml::openTag('div', array('class' => 'bs-navbar-top-example'));
             $this->widget(
                     'bootstrap.widgets.TbNavbar', array(
-                'type' => 'inverse',
-                'brand' => CHtml::image(Yii::app()->getBaseUrl() . '/images/logo.png', 'Inventario'),
-                'brandUrl' => Yii::app()->baseUrl . '/images/inventory.png',
-                'collapse' => true, // requires bootstrap-responsive.css
-                'fixed' => false,
+                'brand' => 'Title',
+                'brandOptions' => array('style' => 'width:auto;margin-left: 0px;'),
+                'fixed' => 'top',
+                'htmlOptions' => array('style' => 'position:absolute'),
                 'items' => array(
                     array(
                         'class' => 'bootstrap.widgets.TbMenu',
                         'items' => array(
-                            array('label' => 'Inicio', 'icon' => 'home', 'url' => array('/site/index'), 'active' => true),
-                            array('label' => 'Enlaces', 'icon' => 'icon-signal icon-white', 'url' => '#'),
+                            array('label' => 'Home', 'url' => array('/site/index')),
                             array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
                             array('label' => 'Contact', 'url' => array('/site/contact')),
-                            array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-                            array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
-                            array(
-                                'label' => 'Dropdown',
-                                'url' => '#',
-                                'items' => array(
-                                    array('label' => 'Action', 'url' => '#'),
-                                    array('label' => 'Another action', 'url' => '#'),
-                                    array(
-                                        'label' => 'Something else here',
-                                        'url' => '#'
-                                    ),
-                                    '---',
-                                    array('label' => 'NAV HEADER'),
-                                    array('label' => 'Separated link', 'url' => '#'),
-                                    array(
-                                        'label' => 'One more separated link',
-                                        'url' => '#'
-                                    ),
-                                )
-                            ),
-                        ),
-                    ),
-                    '<form class="navbar-search pull-left" action=""><input type="text" class="search-query span2" placeholder="Search"></form>',
-                    array(
-                        'class' => 'bootstrap.widgets.TbMenu',
-                        'htmlOptions' => array('class' => 'pull-right'),
-                        'items' => array(
-                            array('label' => 'Link', 'url' => '#'),
-                            '---',
-                            array(
-                                'label' => 'Dropdown',
-                                'url' => '#',
-                                'items' => array(
-                                    array('label' => 'Action', 'url' => '#'),
-                                    array('label' => 'Another action', 'url' => '#'),
-                                    array(
-                                        'label' => 'Something else here',
-                                        'url' => '#'
-                                    ),
-                                    '---',
-                                    array('label' => 'Separated link', 'url' => '#'),
-                                )
-                            ),
-                        ),
-                    ),
-                ),
+                            array('label' => 'Administrar Usuarios'
+                                , 'url' => Yii::app()->user->ui->userManagementAdminUrl
+                                , 'visible' => !Yii::app()->user->isGuest),
+                            array('label' => 'Login'
+                                , 'url' => Yii::app()->user->ui->loginUrl
+                                , 'visible' => Yii::app()->user->isGuest),
+                            array('label' => 'Logout (' . Yii::app()->user->name . ')'
+                                , 'url' => Yii::app()->user->ui->logoutUrl
+                                , 'visible' => !Yii::app()->user->isGuest),
+                        )
+                    )
+                )
                     )
             );
+            echo CHtml::closeTag('div');
             ?>
         </nav>
 
@@ -110,15 +75,15 @@
             </footer>
 
 
-<!--            <div id="footer" class="container">
-                <nav class="navbar navbar-inverse navbar-fixed-bottom">
-                    <div class="navbar-inner navbar-content-center">
-                        <p class="text-muted credit" style="color: white">&copy;<?php echo date('Y'); ?> by My Company.<br/>
-                            All Rights Reserved.
-                            <?php echo Yii::powered(); ?> </p>
-                    </div>
-                </nav>
-            </div>-->
+            <!--            <div id="footer" class="container">
+                            <nav class="navbar navbar-inverse navbar-fixed-bottom">
+                                <div class="navbar-inner navbar-content-center">
+                                    <p class="text-muted credit" style="color: white">&copy;<?php echo date('Y'); ?> by My Company.<br/>
+                                        All Rights Reserved.
+            <?php echo Yii::powered(); ?> </p>
+                                </div>
+                            </nav>
+                        </div>-->
         </div><!-- page -->
     </body>
 </html>
